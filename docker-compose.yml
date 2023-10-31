@@ -1,0 +1,25 @@
+services:
+  nodeapp:
+    container_name: nodeappcontainer
+    build: .
+    image: nodeapp:v1
+    volumes:
+      - $HOME/nodeapp:/code
+    ports:
+      - 3000:3000
+    expose:
+      - 3000
+    environment:
+      DB_HOST: host.docker.internal
+      SQL_PORT: 3333
+      DB_USER: root
+      DB_PASSWORD: Admin@123
+      DB_NAME: test
+      DB_CONNECTION_LIMIT: 20
+      PORT: 3000
+    networks:
+      - internalnet
+
+networks:
+  internalnet:
+    driver: bridge
